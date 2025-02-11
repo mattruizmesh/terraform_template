@@ -4,7 +4,12 @@
   "projectId": "251e5a6f-0541-4503-8810-b421df18b3a1",
   "sendCrashReports": "false",
   "terraformProviders": [],
-  "terraformModules": [],
+  "terraformModules": [
+    {
+      "name": "storage",
+      "source": "github.com/mattruizmesh/terraform_module_source.git//storage?ref=test"
+    }
+  ],
   "context": {
 
   }

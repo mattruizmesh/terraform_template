@@ -1,6 +1,8 @@
 import { Construct } from "constructs";
 import { StorageAccount } from "@cdktf/provider-azurerm/lib/storage-account";
 import { ResourceGroup } from "@cdktf/provider-azurerm/lib/resource-group";
+import { Storage } from "../.gen/modules/storage";
+import { StorageFromPackage } from "@mattruizmesh/projen_demo_cdktf";
 
 export class Test extends Construct {
   constructor(scope: Construct, id: string) {
@@ -14,6 +16,7 @@ export class Test extends Construct {
       location: location,
     });
 
+    // Vanilla CDKTF resource
     new StorageAccount(this, "mattstatefiles", {
       resourceGroupName: rg.name,
       accountReplicationType: "LRS",
@@ -23,5 +26,20 @@ export class Test extends Construct {
       name: "cdktftestran1423"
     });
     
+    // Done using a remote module defined in HCL
+    new Storage(this, "storage", {
+      resourceGroupName: rg.name,
+      location: rg.location,
+      storageAccountName: "stmodulestrg893",
+      storageAccountReplicationType: "LRS",
+      storageAccountTier: "Standard",
+      tags: {
+        environment: "dev",
+        owner: "it",
+        project: "cdktf testing"
+      }
+    });
+
+    new StorageFromPackage(this, "stgfrmpckg12399", rg.location, rg.name);
   }
 }

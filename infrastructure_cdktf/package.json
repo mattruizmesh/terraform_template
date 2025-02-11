@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@cdktf/provider-azurerm": "13.17.0",
+    "@mattruizmesh/projen_demo_cdktf": "^0.0.1",
     "cdktf": "^0.20.11",
     "constructs": "^10.4.2",
     "dotenv": "^16.4.7"
